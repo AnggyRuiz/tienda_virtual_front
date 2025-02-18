@@ -1,0 +1,8 @@
+<h1>Gestión de Usuarios</h1>
+
+<ul>
+  <li *ngFor="let user of users">
+    {{ user.name }} - {{ user.email }} - {{ user.role }}
+    <button *ngIf="isAdmin" (click)="deleteUser(user.id)">Eliminar</button>
+  </li>
+</ul>

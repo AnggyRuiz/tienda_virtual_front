@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';  // Para mat-raised-
 import { MatCardModule } from '@angular/material/card';  // Para mat-card
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    CommonModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -23,23 +25,35 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
-
+  ngOnInit() {
+    console.log('LoginComponent cargado');
+  }
   onLogin() {
     console.log("LLega aca");
-    
-   /* this.authService.login(this.email, this.password).subscribe(
-       (response) => {
-        // Si el login es exitoso, guardamos el token en el localStorage
-        localStorage.setItem('token', response.token);
 
-        // Redirigimos al usuario a la página de productos o donde sea necesario
-        this.router.navigate(['/products']);
+    this.authService.login(this.email, this.password).subscribe(
+      (response) => {
+        if (response.access_token) {
+
+          console.log("✅ Login exitoso:", response);
+
+          setTimeout(() => {
+            console.log("🔄 Redirigiendo a /users...");
+            this.router.navigate(['/admin']);
+          }, 100);
+        } else {
+          // Si el login falla, mostramos el mensaje de error
+          alert(response.message);
+        }
       },
       (error) => {
+        // Aquí manejamos el error y mostramos un mensaje adecuado
+        this.errorMessage = "Credenciales inválidas. Intenta de nuevo.";
         console.error('Login failed', error);
-      } 
-    );*/
+      }
+    );
   }
 }

@@ -1,0 +1,36 @@
+/* Centrar todo el contenido de la página */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    margin: 0;
+  }
+  
+  /* Centrar el formulario */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center!important;
+    align-items: center;
+    max-width: 600px; /* Ajusta el tamaño según lo necesario */
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%; /* Asegura que el formulario no se desborde */
+  }
+  
+  /* Espacio entre los inputs */
+  mat-form-field {
+    margin-bottom: 16px; /* Aumenta el espacio entre los inputs */
+    width: 100%;
+  }
+  
+  /* Espacio para el botón */
+  button[type="submit"] {
+    margin-top: 16px;
+  }
+  /* Botón de Cerrar sesión */
+.logout-button {
+    margin-top: 20px; /* Espacio entre el formulario y el botón */
+    width: 100%; /* El botón ocupa todo el ancho del formulario */
+  }

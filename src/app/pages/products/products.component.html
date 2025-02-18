@@ -1,10 +1,55 @@
-<!-- <div *ngFor="let product of products">
-    <mat-card>
-      <mat-card-title>{{ product.name }}</mat-card-title>
-      <mat-card-content>{{ product.description }}</mat-card-content>
-      <mat-card-actions>
-        <button mat-button>View</button>
+<div class="page-container">
+  <!-- Formulario para crear un nuevo producto -->
+  <mat-card class="product-card">
+    <mat-card-header>
+      <mat-card-title>Crear Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="addProduct()" #productForm="ngForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre del Producto</mat-label>
+          <input matInput [(ngModel)]="newProduct.name" name="name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Precio</mat-label>
+          <input matInput [(ngModel)]="newProduct.price" name="price" required type="number" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Descripción</mat-label>
+          <input matInput [(ngModel)]="newProduct.description" name="description" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Stock</mat-label>
+          <input matInput [(ngModel)]="newProduct.stock" name="stock" required type="number" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Crear Producto</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Lista de productos -->
+  <div class="product-list">
+    <mat-card *ngFor="let product of products" class="product-card">
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{ product.price }} USD</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ product.description }}</p>
+        <p>Stock: {{ product.stock }} unidades</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="warn" (click)="deleteProduct(product.id)">Eliminar</button>
       </mat-card-actions>
     </mat-card>
   </div>
-   -->
+
+  <!-- Botón de Cerrar sesión al final -->
+  <button mat-raised-button color="warn" (click)="logout()" class="logout-button">
+    Cerrar sesión
+  </button>
+</div>
